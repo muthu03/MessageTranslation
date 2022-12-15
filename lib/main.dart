@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:second/second.dart';
 import 'package:sms/sms.dart';
 import 'package:translator/translator.dart';
+import '../smsfile.dart';
 
 
 void main() {
@@ -11,10 +12,14 @@ void main() {
 class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    
+    
     return MaterialApp(
         title: "Test App",
         home: HomePage(),
+        
     );
+    
   }
 }
 
@@ -45,7 +50,7 @@ class _HomePageState extends State<HomePage> {
           List<SmsMessage> messages = await query.querySms( //querySms is from sms package
               kinds: [SmsQueryKind.Inbox, SmsQueryKind.Sent, SmsQueryKind.Draft], 
               //filter Inbox, sent or draft messages
-              count: 10, //number of sms to read
+              count: 100, //number of sms to read
           );
 
          setState(() { //update UI
@@ -63,6 +68,22 @@ class _HomePageState extends State<HomePage> {
          title: Text("Read SMS Inbox"),
          backgroundColor: Colors.redAccent,
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+	floatingActionButton: FloatingActionButton(
+		// isExtended: true,
+		child: Icon(Icons.add),
+		backgroundColor: Colors.green,
+		onPressed: () {
+      Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  smsapp(),
+                            ),
+                          );
+		
+		},
+	  ),
       body: SingleChildScrollView( 
          child: Container(
             
