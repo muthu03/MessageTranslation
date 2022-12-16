@@ -30,7 +30,7 @@ class HomePage extends StatefulWidget{
 
 class _HomePageState extends State<HomePage> {
   GoogleTranslator translator = GoogleTranslator();
-  TextEditingController controller = TextEditingController();
+  //TextEditingController controller = TextEditingController();
 
   void _navigateToNextScreen(BuildContext context,var messageone) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => Second(messageone: messageone)));
@@ -65,14 +65,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold( 
       appBar: AppBar( 
-         title: Text("Read SMS Inbox"),
-         backgroundColor: Colors.redAccent,
+         title: Text("குறுஞ்செய்தி உட்பெட்டி"),
+         backgroundColor: Color.fromARGB(255, 246, 100, 2),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
 	floatingActionButton: FloatingActionButton(
 		// isExtended: true,
-		child: Icon(Icons.add),
-		backgroundColor: Colors.green,
+		child: Icon(Icons.send),
+		backgroundColor: Color.fromARGB(255, 246, 100, 2),
 		onPressed: () {
       Navigator.push(
                             context,
@@ -86,6 +86,7 @@ class _HomePageState extends State<HomePage> {
 	  ),
       body: SingleChildScrollView( 
          child: Container(
+          
             
             padding: EdgeInsets.all(20),
             child: allmessages == null?
@@ -96,15 +97,17 @@ class _HomePageState extends State<HomePage> {
               children:allmessages.map((messageone){ //populating children to column using map
                   String type = "NONE";  //get the type of message i.e. inbox, sent, draft
                   if(messageone.kind == SmsMessageKind.Received){
-                     type = "Inbox";
+                     type = "உட்பெட்டி";
                   }else if(messageone.kind == SmsMessageKind.Sent){
-                     type = "Outbox";
+                     type = "அனுப்பப்பட்டவை";
                   }else if(messageone.kind == SmsMessageKind.Draft){
-                     type = "Draft";
+                     type = "வரைவு";
                   }
                   return Container( 
                      child: Card( 
+                      
                        child: ListTile( 
+                          tileColor: Color.fromARGB(255, 255, 210, 165),
                           leading: Icon(Icons.message),
                           title: Padding(child: Text(messageone.address + " (" + type + ")"),
                                     padding: EdgeInsets.only(bottom:10, top:10)
@@ -117,6 +120,7 @@ class _HomePageState extends State<HomePage> {
                           },
                        )
                      ),
+                     
                   );
                }).toList()
             ),

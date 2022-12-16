@@ -40,6 +40,7 @@ dependencies:
   flutter_sms: ^2.3.3
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.7.0"
   flutter_test:
     sdk: flutter
 
@@ -49,9 +50,15 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-
+  
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assessts/icons/ta.png"
+
 
 # The following section is specific to Flutter packages.
 flutter:

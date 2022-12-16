@@ -33,7 +33,7 @@ class _MyAppState extends State<smsapp> {
         recipients: recipients,
         sendDirect: sendDirect,
       );
-      setState(() => _message = _result);
+      setState(() => _message = "குறுஞ்செய்தி வெற்றிகரமாக அனுப்பப்பட்டது");
     } catch (error) {
       setState(() => _message = error.toString());
     }
@@ -49,6 +49,7 @@ class _MyAppState extends State<smsapp> {
   Widget _phoneTile(String name) {
     return Padding(
       padding: const EdgeInsets.all(3),
+      
       child: Container(
           decoration: BoxDecoration(
               border: Border(
@@ -87,7 +88,8 @@ class _MyAppState extends State<smsapp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('send SMS'),
+          title: const Text('குறுஞ்செய்தி அனுப்புதல்'),
+          backgroundColor: Color.fromARGB(255, 246, 100, 2),
         ),
         body: ListView(
           children: <Widget>[
@@ -107,10 +109,12 @@ class _MyAppState extends State<smsapp> {
                 ),
               ),
             ListTile(
+              
               leading: const Icon(Icons.people),
               title: TextField(
                 controller: _controllerPeople,
                 decoration: const InputDecoration(
+                    hoverColor: Color.fromARGB(255, 255, 102, 0),
                     labelText: 'தொலைபேசி எண்ணைச் சேர்க்கவும்'),
                 keyboardType: TextInputType.number,
                 onChanged: (String value) => setState(() {}),
@@ -139,11 +143,8 @@ class _MyAppState extends State<smsapp> {
             Padding(
               padding: const EdgeInsets.all(8),
               child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith(
-                      (states) => Theme.of(context).colorScheme.secondary),
-                  padding: MaterialStateProperty.resolveWith(
-                      (states) => const EdgeInsets.symmetric(vertical: 0.5)),
+                style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(255, 255, 102, 0),
                 ),
                 onPressed: () {
                   _send();
@@ -152,6 +153,7 @@ class _MyAppState extends State<smsapp> {
                   'அனுப்பு',
                   //style: Theme.of(context).textTheme.displayMedium,
                 ),
+                
               ),
             ),
             Visibility(
@@ -163,7 +165,7 @@ class _MyAppState extends State<smsapp> {
                     child: Padding(
                       padding: const EdgeInsets.all(12),
                       child: Text(
-                        _message ?? 'No Data',
+                        _message ?? 'தகவல் இல்லை',
                         maxLines: null,
                       ),
                     ),
@@ -179,7 +181,7 @@ class _MyAppState extends State<smsapp> {
 
   void _send() {
     if (people.isEmpty) {
-      setState(() => _message = 'At Least 1 Person or Message Required');
+      setState(() => _message = 'குறைந்தபட்சம் ஒரு கைபேசி எண்ணைச் சேர்க்கவும்');
     } else {
       _sendSMS(people);
     }

@@ -35,7 +35,8 @@ class _SecondState extends State<Second> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("General"),
+        title: Text("தமிழ் மொழியாக்கம் "),
+        backgroundColor: Color.fromARGB(255, 246, 100, 2),
       ),
 
       
@@ -43,26 +44,18 @@ class _SecondState extends State<Second> {
         body: Center(child: Column(children: <Widget>[  
             
             Container(
-        child: (this.translation!='')?Container(child: Text(this.translation),
+               padding: EdgeInsets.all(20),
+        child: (this.translation!='')?ListTile(
+          leading: Icon(Icons.message),
+          subtitle: Text(this.translation),
         
         ):CircularProgressIndicator(),
         
       ), 
-       Container(  
+       (this.translation!='')?Container(  
               margin: EdgeInsets.all(25),  
-              child: FlatButton(  
-                child: Text('Audio', style: TextStyle(fontSize: 20.0),),  
-                onPressed: ()=> {
-                  Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  Audiofile(value: this.translation),
-                            ),
-                          )
-                },  
-              ),  
-            ), 
+              child: Audiofile(value: this.translation),
+            ):CircularProgressIndicator(), 
           ]  
          )) 
     );
@@ -133,20 +126,15 @@ class AudiofileState extends State<Audiofile> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(title: const Text('Flutter TTS')),
-            body: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(children: [button()]),
-            )));
+    return  
+             Column(children: [button()]);
   }
 
   Widget button() {
     if (_ttsState == TtsState.stopped) {
-      return TextButton(onPressed: speak, child: const Text('Play'));
+      return RaisedButton(onPressed: speak, child: const Text('வாசிக்க'),color: Color.fromARGB(255, 239, 159, 106),);
     } else {
-      return TextButton(onPressed: stop, child: const Text('Stop'));
+      return TextButton(onPressed: stop, child: const Text('நிறுத்து'));
     }
   }
 
